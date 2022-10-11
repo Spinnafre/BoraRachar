@@ -92,7 +92,7 @@
         android:clickable="true"
         android:contentDescription="Informar quantidade total em reais"
         android:elevation="6dp"
-        app:backgroundTint="#FFC107"
+        app:backgroundTint="@color/purple_600"
         app:fabCustomSize="52dp"
         app:layout_constraintBottom_toBottomOf="@+id/floatingActionButtonShare"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +102,8 @@
         app:layout_constraintVertical_bias="0.0"
         app:maxImageSize="91dp"
         app:rippleColor="#C15353"
-        app:srcCompat="@drawable/ic_launcher2_foreground" />
+        app:srcCompat="@drawable/ic_launcher2_foreground"
+        app:tint="#EEE" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonShare"
@@ -111,7 +112,7 @@
         android:clickable="true"
         android:contentDescription="Compartilhar resultado"
         android:elevation="6dp"
-        app:backgroundTint="#FFC107"
+        app:backgroundTint="@color/purple_600"
         app:fabCustomSize="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonSpeak"
@@ -120,6 +121,7 @@
         app:layout_constraintTop_toBottomOf="@+id/totalPrice"
         app:layout_constraintVertical_bias="0.282"
         app:rippleColor="#E91E63"
-        app:srcCompat="?attr/actionModeShareDrawable" />
+        app:srcCompat="?attr/actionModeShareDrawable"
+        app:tint="#EEE" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
