@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Bora rachar man</string>
-    <string name="placeholder_input">R$</string>
+    <string name="placeholder_input_people">Quantidade de pessoas</string>
+    <string name="placeholder_input_price">Valor em reais</string>
     <string name="placeholder_input_total">R$ 0.00</string>
     <string name="share_placeholder">Compartilhar</string>
     <string name="tts_placeholder">Falar</string>
