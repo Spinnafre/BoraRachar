@@ -81,7 +81,9 @@
         android:inputType="number"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/totalPrice"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/textInputPrice" />
 
@@ -89,15 +91,35 @@
         android:id="@+id/totalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="36dp"
         android:text="@string/placeholder_input_total"
         android:textColor="@color/purple_500"
         android:textSize="25sp"
         app:fontFamily="sans-serif-black"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonShare"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputQtd" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="60dp"
+        android:clickable="true"
+        android:contentDescription="@string/btn_share_description"
+        android:elevation="6dp"
+        app:backgroundTint="@color/purple_600"
+        app:fabCustomSize="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonSpeak"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalPrice"
+        app:rippleColor="#E91E63"
+        app:srcCompat="?attr/actionModeShareDrawable"
+        app:tint="#EEE" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonSpeak"
@@ -118,25 +140,6 @@
         app:maxImageSize="91dp"
         app:rippleColor="#C15353"
         app:srcCompat="@drawable/ic_launcher2_foreground"
-        app:tint="#EEE" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButtonShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:clickable="true"
-        android:contentDescription="@string/btn_share_description"
-        android:elevation="6dp"
-        app:backgroundTint="@color/purple_600"
-        app:fabCustomSize="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonSpeak"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalPrice"
-        app:rippleColor="#E91E63"
-        app:srcCompat="?attr/actionModeShareDrawable"
         app:tint="#EEE" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
