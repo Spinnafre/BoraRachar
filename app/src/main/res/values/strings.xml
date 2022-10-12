@@ -2,8 +2,12 @@
     <string name="app_name">Bora rachar man</string>
     <string name="placeholder_input_people">Quantidade de pessoas</string>
     <string name="placeholder_input_price">Valor em reais</string>
-    <string name="placeholder_input_total">R$ 0.00</string>
+    <string name="placeholder_input_total"></string>
     <string name="share_placeholder">Compartilhar</string>
     <string name="tts_placeholder">Falar</string>
     <string name="header_placeholder">Vamos rachar!</string>
+    <string name="label_input_text_price">R$</string>
+    <string name="logo_description">Logotipo do aplicativo</string>
+    <string name="btn_share_description">Compartilhar resultado</string>
+    <string name="btn_tts_description">Informar quantidade total em reais"</string>
 </resources>

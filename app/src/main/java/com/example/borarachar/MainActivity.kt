@@ -13,11 +13,13 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.util.*
 
 
 class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     val df = DecimalFormat("#.##")
+
     var tts: TextToSpeech? = null
     var buttonToSpeak : FloatingActionButton ? = null
     private val myLocale : Locale = Locale("pt","BR")
@@ -36,24 +38,27 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         val inputPrice : EditText = findViewById(R.id.textInputPrice)
         val inputDivisor : EditText = findViewById(R.id.textInputQtd)
         val inputTotalPrice : TextView = findViewById(R.id.totalPrice)
-        val btnToSpeak : FloatingActionButton =findViewById(R.id.floatingActionButtonSpeak)
+//        val btnToSpeak : FloatingActionButton =findViewById(R.id.floatingActionButtonSpeak)
         val btnToShare : FloatingActionButton = findViewById(R.id.floatingActionButtonShare)
+
+        val format: NumberFormat = NumberFormat.getCurrencyInstance(myLocale)
+        format.maximumFractionDigits = 2
 
         inputPrice.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                Log.v("test","Before text changed -> ${s.toString()}")
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.v("test","Text changed -> ${s.toString()}")
             }
 
             override fun afterTextChanged(s: Editable?) {
                 Log.v("test","Texto alterado para ${s.toString()}")
                 val price : Float?  = s.toString().toFloatOrNull()
 
+
+
                 if(price === null){
-                    inputTotalPrice.text = "R$ ${0.00}"
+                    inputTotalPrice.text = format.format(0.00)
                     return
                 }
 
@@ -67,24 +72,23 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
 
                 if(divisor<=0.00){
                     Toast.makeText(applicationContext,"Insira um valor maior do que 0 na quantidade de pessoas ",Toast.LENGTH_SHORT).show()
-                    inputTotalPrice.text = "R$ ${0.00}"
+                    inputTotalPrice.text = format.format(0.00)
                     return
                 }
-2
+
                 val result : Float = price / divisor
 
-                inputTotalPrice.text = "R$ ${df.format(result)}"
+//                inputTotalPrice.text =  df.format(result)
+                inputTotalPrice.text =  format.format(0.00)
             }
 
         })
 
         inputDivisor.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                Log.v("test","Before text changed -> ${s.toString()}")
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.v("test","Text changed -> ${s.toString()}")
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -92,12 +96,12 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
                 val divisor : Float? = s.toString().toFloatOrNull()
 
                 if(divisor  === null ){
-                    inputTotalPrice.text = "R$ ${0.00}"
+                    inputTotalPrice.text = format.format(0.00)
                     return
                 }
 
                 if(divisor<=0.00){
-                    inputTotalPrice.text = "R$ ${0.00}"
+                    inputTotalPrice.text = format.format(0.00)
                     return
                 }
 
@@ -108,18 +112,18 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
                 }
 
                 if(price.equals(0)){
-                    inputTotalPrice.text = "R$ ${0.00}"
+                    inputTotalPrice.text = format.format(0.00)
                     return
                 }
 
                 val result : Float = price / divisor
 
-                inputTotalPrice.text = "R$ ${df.format(result)}"
+                inputTotalPrice.text = format.format(result)
             }
 
         })
 
-        btnToSpeak.setOnClickListener{
+        buttonToSpeak!!.setOnClickListener{
             speakOut(inputTotalPrice.text.toString())
         }
 
