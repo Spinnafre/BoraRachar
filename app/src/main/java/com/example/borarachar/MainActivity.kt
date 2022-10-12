@@ -7,44 +7,45 @@ import android.speech.tts.TextToSpeech
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 
 
 class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
-    val df = DecimalFormat("#.##")
-
-    var tts: TextToSpeech? = null
-    var buttonToSpeak : FloatingActionButton ? = null
+    private lateinit var tts: TextToSpeech
     private val myLocale : Locale = Locale("pt","BR")
+
+    lateinit var inputPrice : EditText
+
+    lateinit var inputDivisor : EditText
+    lateinit var inputTotalPrice : TextView
+    private lateinit var buttonToSpeak : FloatingActionButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        inputDivisor = findViewById(R.id.textInputQtd)
+        inputPrice = findViewById(R.id.textInputPrice)
+        inputTotalPrice = findViewById(R.id.totalPrice)
+
         buttonToSpeak = findViewById(R.id.floatingActionButtonSpeak)
         //Not-null assertion -> converte para qualquer valor para non-null e
         // se o valor é null então lança uma exceção
-        buttonToSpeak!!.isEnabled = false
+        buttonToSpeak.isEnabled = false
 
         tts = TextToSpeech(this, this)
 
-        val inputPrice : EditText = findViewById(R.id.textInputPrice)
-        val inputDivisor : EditText = findViewById(R.id.textInputQtd)
-        val inputTotalPrice : TextView = findViewById(R.id.totalPrice)
-//        val btnToSpeak : FloatingActionButton =findViewById(R.id.floatingActionButtonSpeak)
         val btnToShare : FloatingActionButton = findViewById(R.id.floatingActionButtonShare)
 
         val format: NumberFormat = NumberFormat.getCurrencyInstance(myLocale)
         format.maximumFractionDigits = 2
 
-        inputPrice.addTextChangedListener(object :TextWatcher{
+        val myTextWatcher = object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -52,78 +53,30 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                Log.v("test","Texto alterado para ${s.toString()}")
-                val price : Float?  = s.toString().toFloatOrNull()
-
-
-
-                if(price === null){
-                    inputTotalPrice.text = format.format(0.00)
-                    return
-                }
-
-
                 val divisor : Float? = inputDivisor.text.toString().toFloatOrNull()
-
-                if(divisor === null){
-                    Toast.makeText(applicationContext,"Insira um valor inteiro na quantidade de pessoas ",Toast.LENGTH_SHORT).show()
-                    return
-                }
-
-                if(divisor<=0.00){
-                    Toast.makeText(applicationContext,"Insira um valor maior do que 0 na quantidade de pessoas ",Toast.LENGTH_SHORT).show()
-                    inputTotalPrice.text = format.format(0.00)
-                    return
-                }
-
-                val result : Float = price / divisor
-
-//                inputTotalPrice.text =  df.format(result)
-                inputTotalPrice.text =  format.format(0.00)
-            }
-
-        })
-
-        inputDivisor.addTextChangedListener(object :TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                Log.v("test","Texto alterado para ${s.toString()}")
-                val divisor : Float? = s.toString().toFloatOrNull()
-
-                if(divisor  === null ){
-                    inputTotalPrice.text = format.format(0.00)
-                    return
-                }
-
-                if(divisor<=0.00){
-                    inputTotalPrice.text = format.format(0.00)
-                    return
-                }
+                val isValidDivisor =  againstNullOrLessThan(divisor)
 
                 val price : Float? = inputPrice.text.toString().toFloatOrNull()
+                val isValidPrice = againstNullOrLessThan(price)
 
-                if(price === null){
+                if(!isValidDivisor || !isValidPrice){
+                    changeInputTotalPrice(inputTotalPrice,format.format(0.00))
                     return
                 }
 
-                if(price.equals(0)){
-                    inputTotalPrice.text = format.format(0.00)
-                    return
-                }
+                val result : Float? = price?.div(divisor!!)
 
-                val result : Float = price / divisor
-
-                inputTotalPrice.text = format.format(result)
+                changeInputTotalPrice(inputTotalPrice,format.format(result))
             }
 
-        })
+        }
 
-        buttonToSpeak!!.setOnClickListener{
+        inputTotalPrice.text = format.format(0.00)
+
+        inputPrice.addTextChangedListener(myTextWatcher)
+        inputDivisor.addTextChangedListener(myTextWatcher)
+
+        buttonToSpeak.setOnClickListener{
             speakOut(inputTotalPrice.text.toString())
         }
 
@@ -136,12 +89,12 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             // set US English as language for tts
-            val result = tts!!.setLanguage(this.myLocale)
+            val result = tts.setLanguage(this.myLocale)
 
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS","The Language specified is not supported!")
             } else {
-                buttonToSpeak!!.isEnabled = true
+                buttonToSpeak.isEnabled = true
             }
 
         } else {
@@ -149,12 +102,23 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         }
     }
 
+    private fun againstNullOrLessThan(value:Float?,min:Double=0.00):Boolean{
+        if(value === null || value <= min){
+            return false
+        }
+        return true
+    }
+
+    private fun changeInputTotalPrice(input:TextView,value:String){
+        input.text = value
+    }
+
     private fun speakOut(text : String) {
-        tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, null,"")
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null,"")
     }
 
     private fun shareResult(text:String){
-        val sendIntent : Intent = Intent()
+        val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(Intent.EXTRA_SUBJECT,"BoraRachar!")
         sendIntent.putExtra(Intent.EXTRA_TEXT,"Resultado da rachadinha : $text")
@@ -164,10 +128,8 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     override fun onDestroy() {
         // Shutdown TTS
-        if (tts != null) {
-            tts!!.stop()
-            tts!!.shutdown()
-        }
+        tts.stop()
+        tts.shutdown()
         super.onDestroy()
     }
 }
