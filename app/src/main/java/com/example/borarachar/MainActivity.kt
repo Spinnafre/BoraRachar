@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     lateinit var inputDivisor : EditText
     lateinit var inputTotalPrice : TextView
     private lateinit var buttonToSpeak : FloatingActionButton
+    private lateinit var buttonShowAbout : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         inputDivisor = findViewById(R.id.textInputQtd)
         inputPrice = findViewById(R.id.textInputPrice)
         inputTotalPrice = findViewById(R.id.totalPrice)
+        buttonShowAbout = findViewById(R.id.textView2)
 
         buttonToSpeak = findViewById(R.id.floatingActionButtonSpeak)
         //Not-null assertion -> converte para qualquer valor para non-null e
@@ -78,6 +80,13 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         buttonToSpeak.setOnClickListener{
             speakOut(inputTotalPrice.text.toString())
+        }
+
+        buttonShowAbout.setOnClickListener {
+            val openAbout = Intent(this,MainActivity2::class.java)
+            openAbout.putExtra("key","❤")
+            startActivity(openAbout)
+
         }
 
         btnToShare.setOnClickListener{

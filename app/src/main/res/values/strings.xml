@@ -3,6 +3,8 @@
     <string name="placeholder_input_people">Quantidade de pessoas</string>
     <string name="placeholder_input_price">Valor em reais</string>
     <string name="placeholder_input_total">0.00</string>
+    <string name="app_description">Projeto desenvolvido por Davi Silva</string>
+    <string name="back_to_main">Voltar</string>
     <string name="share_placeholder">Compartilhar</string>
     <string name="tts_placeholder">Falar</string>
     <string name="header_placeholder">Vamos rachar!</string>
