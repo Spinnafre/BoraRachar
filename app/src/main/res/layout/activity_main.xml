@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B996F8"
+    android:background="@color/bg_primary"
     tools:context=".MainActivity">
 
     <TextView
@@ -68,7 +68,8 @@
         app:layout_constraintEnd_toStartOf="@+id/textInputQtd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textInputQtd"
-        app:srcCompat="@drawable/ic_baseline_people_24" />
+        app:srcCompat="@drawable/ic_baseline_people_24"
+        app:tintMode="src_in" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputQtd"

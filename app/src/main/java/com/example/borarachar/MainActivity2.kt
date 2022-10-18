@@ -14,12 +14,10 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
-        val txt : String = intent.getStringExtra("key") as String
-
         backToMain = findViewById(R.id.btnBackToMain)
         textDescription = findViewById(R.id.textView)
 
-        textDescription.text = "Projeto desenvolvido por com $txt por Davi Silva"
+        textDescription.text = getString(R.string.app_description)
 
         backToMain.setOnClickListener {
             finish()

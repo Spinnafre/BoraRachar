@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Bora rachar man</string>
+    <string name="placeholder_input_people">Amount of people</string>
+    <string name="placeholder_input_price">Value in real</string>
+    <string name="placeholder_input_total">0.00</string>
+    <string name="app_description">Project developed by Davi Silva</string>
+    <string name="back_to_main">Go Back</string>
+    <string name="share_placeholder">Share</string>
+    <string name="tts_placeholder">Speak</string>
+    <string name="header_placeholder">Vamos rachar!</string>
+    <string name="label_input_text_price">R$</string>
+    <string name="logo_description">App logo</string>
+    <string name="btn_share_description">Share result</string>
+    <string name="btn_tts_description">Inform total amount in reais"</string>
+</resources>
