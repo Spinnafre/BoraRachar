@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="97dp"
+        android:text="@string/header_placeholder"
+        android:textColor="@color/purple_500"
+        android:textSize="40sp"
+        app:fontFamily="sans-serif-black"
+        app:layout_constraintBottom_toTopOf="@+id/textInputPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="70dp"
+        android:autoSizeTextType="uniform"
+        android:digits="0123456789."
+        android:gravity="start"
+        android:hint="@string/placeholder_input_price"
+        android:inputType="number"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/textPrice"
+        app:layout_constraintTop_toTopOf="@+id/textPrice"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <TextView
+        android:id="@+id/textPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="104dp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/label_input_text_price"
+        android:textColor="@color/purple_500"
+        android:textSize="25sp"
+        app:fontFamily="sans-serif-black"
+        app:layout_constraintEnd_toStartOf="@+id/textInputPrice"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="36dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="70dp"
+        android:contentDescription="@string/logo_description"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputQtd"
+        app:layout_constraintEnd_toStartOf="@+id/textInputQtd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textInputQtd"
+        app:srcCompat="@drawable/ic_baseline_people_24"
+        app:tintMode="src_in" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputQtd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="70dp"
+        android:digits="0123456789."
+        android:hint="@string/placeholder_input_people"
+        android:inputType="number"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/totalPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/textInputPrice" />
+
+    <TextView
+        android:id="@+id/totalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/placeholder_input_total"
+        android:textColor="@color/purple_500"
+        android:textSize="25sp"
+        app:fontFamily="sans-serif-black"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonShare"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputQtd" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="60dp"
+        android:clickable="true"
+        android:contentDescription="@string/btn_share_description"
+        android:elevation="6dp"
+        app:backgroundTint="@color/purple_600"
+        app:fabCustomSize="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonSpeak"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalPrice"
+        app:rippleColor="#E91E63"
+        app:srcCompat="?attr/actionModeShareDrawable"
+        app:tint="#EEE" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonSpeak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="103dp"
+        android:clickable="true"
+        android:contentDescription="@string/btn_tts_description"
+        android:elevation="6dp"
+        app:backgroundTint="@color/purple_600"
+        app:fabCustomSize="52dp"
+        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButtonShare"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButtonShare"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButtonShare"
+        app:layout_constraintVertical_bias="0.0"
+        app:maxImageSize="91dp"
+        app:rippleColor="#C15353"
+        app:srcCompat="@drawable/ic_launcher2_foreground"
+        app:tint="#EEE" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
